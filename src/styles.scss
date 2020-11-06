@@ -1,0 +1,31 @@
+* { 
+  box-sizing: border-box;
+}
+body, html {
+  height: 100%;
+}
+
+body {
+  display:flex;
+  flex-direction:column;
+  margin: 0;
+  // padding:0;
+}
+#root {
+  background:white;
+  display:flex;
+  flex-direction:column;
+  margin: 0;
+  padding:0;
+
+  #root { 
+    display: flex;
+    flex-direction:column;
+    flex:1;
+  
+    main {
+      flex:1;
+      padding: 1rem;
+    }
+  }
+  }

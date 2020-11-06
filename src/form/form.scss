@@ -1,0 +1,33 @@
+div {
+  margin:auto;
+}
+
+
+#inputfield {
+  display:inline-flex;
+  flex-direction: row;
+  justify-content: center;
+  margin-bottom: 1rem;
+
+}
+span {
+background-color: lightgray;
+margin: .25em;
+padding: .25em
+}
+
+input[type="radio"]{
+  display: none
+}
+
+
+.buttonfield {
+  display: flex;
+  flex-direction:row;
+  justify-content: center;
+}
+label {
+  display: flex;
+  flex-direction:row;
+  justify-content: center;
+}
