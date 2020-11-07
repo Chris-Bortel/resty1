@@ -22,16 +22,16 @@ class Results extends React.Component {
   // I will want to set fetching to false and then onSubmit I will want to change fetching to true
   async componentDidMount() {
     this.setState({fetching:true}) 
-    // const response = await superagent.get('https://swapi.dev/api/people/');
+    const response = await superagent.get('https://pokeapi.co/api/v2/pokemon');
     // const response = await fetch('https://swapi.dev/api/people/');
-    const response = await fetch('https://auth-server-cb.herokuapp.com/api/v1/categories')
-    const results = await response.json()
-    const header = response.headers || [];
+    // const response = await fetch('https://auth-server-cb.herokuapp.com/api/v1/categories')
     console.log(response)
+    const results = response.body.results
+    const header = response.headers || [];
     console.log(header)
     // const results = response.body.results || [];
-    this.setState({header:header, results:results.results, fetching:false})
-    console.log(results)
+    console.log(results.name)
+    this.setState({header:header, results:results, fetching:false})
   }
 
   render(){
@@ -39,17 +39,18 @@ class Results extends React.Component {
       <>
       <ul>
         {
-        
-           <li >{this.state.header}</li>
+          Object.keys(this.state.header).map((propertyName) => {
+
+           return <li >{this.state.header[propertyName]}</li>
+          })
         }
       </ul>
 
-      {/* <ul>
-        {
-            <li>{this.state.results}</li>
-       
+      {
+          this.state.results.map((results) => {
+            return <li>{results._id}</li>
+          })
         }
-      </ul> */}
       </>
     )
   }
