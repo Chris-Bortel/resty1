@@ -4,6 +4,7 @@ import "./styles.scss";
 import Header from "./header/header.js";
 import Footer from "./footer/footer.js";
 import Form from "./form/form.js";
+import Results from "./results/results.js"
 // write an app componet that serves as the container for all sub-components
 
 class App extends React.Component {
@@ -21,6 +22,7 @@ class App extends React.Component {
       <>
         <Header />
         <Form />
+        <Results />
         <main>
           <div className="App"></div>
         </main>
