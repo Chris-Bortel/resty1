@@ -4,6 +4,8 @@ import React from 'react';
 
 import superagent from 'superagent';
 
+import Form from '../form/form.js'
+
 class Results extends React.Component {
 
   constructor(props) {
@@ -20,9 +22,15 @@ class Results extends React.Component {
   // I will want to set fetching to false and then onSubmit I will want to change fetching to true
   async componentDidMount() {
     this.setState({fetching:true}) 
-    const response = await superagent.get('https://auth-server-cb.herokuapp.com/api/v1/categories');
-    const results = response.body.results || [];
-    this.setState({results, fetching:false})
+    // const response = await superagent.get('https://swapi.dev/api/people/');
+    // const response = await fetch('https://swapi.dev/api/people/');
+    const response = await fetch('https://auth-server-cb.herokuapp.com/api/v1/categories')
+    const results = await response.json()
+    const header = response.headers || [];
+    console.log(response)
+    console.log(header)
+    // const results = response.body.results || [];
+    this.setState({header:header, results:results.results, fetching:false})
     console.log(results)
   }
 
@@ -31,17 +39,15 @@ class Results extends React.Component {
       <>
       <ul>
         {
-          this.state.results.map((results) => {
-            return <li>{results._id}</li>
-          })
+        
+           <li >{this.state.header}</li>
         }
       </ul>
-{/* 
-      <ul>
+
+      {/* <ul>
         {
-          this.state.results.map((results) => {
-            return <li>{this.state.results} {results._id}</li>
-          })
+            <li>{this.state.results}</li>
+       
         }
       </ul> */}
       </>
