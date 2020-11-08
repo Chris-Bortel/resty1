@@ -3,6 +3,7 @@
 import React from 'react';
 
 import superagent from 'superagent';
+import beautify from 'json-beautify';
 
 import Form from '../form/form.js'
 
@@ -30,7 +31,7 @@ class Results extends React.Component {
     const header = response.headers || [];
     console.log(header)
     // const results = response.body.results || [];
-    console.log(results.name)
+    console.log(results)
     this.setState({header:header, results:results, fetching:false})
   }
 
@@ -39,16 +40,14 @@ class Results extends React.Component {
       <>
       <ul>
         {
-          Object.keys(this.state.header).map((propertyName) => {
-
-           return <li >{this.state.header[propertyName]}</li>
-          })
+       beautify(this.state.header)
+      
         }
       </ul>
 
       {
           this.state.results.map((results) => {
-            return <li>{results._id}</li>
+            return <li>{beautify(results)}</li>
           })
         }
       </>

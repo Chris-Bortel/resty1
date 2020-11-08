@@ -16,6 +16,9 @@ class App extends React.Component {
       count: 0
     };
   }
+
+  // write a function for the superagent call which will be passed as a prop to form. will be called onSubmit for the form 
+  
   // this.handleSubmit = this.handleSubmit.bind(this);
   render() {
     return (
