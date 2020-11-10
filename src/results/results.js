@@ -2,55 +2,37 @@
 
 import React from 'react';
 
-import superagent from 'superagent';
 import beautify from 'json-beautify';
 
 import Form from '../form/form.js'
-
+// from app, the props being sent to results is going to be the data from the superagent results = this.state.data    results will render out whatever the data is ... this.props.results
 class Results extends React.Component {
-
-  constructor(props) {
-    super(props);
-    this.state = {
-      fetching: false, 
-      count: 0, 
-      header: [], 
-      results: []
-    }
-    console.log(this.state)
-  }
-
-  // I will want to set fetching to false and then onSubmit I will want to change fetching to true
-  async componentDidMount() {
-    this.setState({fetching:true}) 
-    const response = await superagent.get('https://pokeapi.co/api/v2/pokemon');
-    // const response = await fetch('https://swapi.dev/api/people/');
-    // const response = await fetch('https://auth-server-cb.herokuapp.com/api/v1/categories')
-    console.log(response)
-    const results = response.body.results
-    const header = response.headers || [];
-    console.log(header)
-    // const results = response.body.results || [];
-    console.log(results)
-    this.setState({header:header, results:results, fetching:false})
-  }
+    constructor(props) {
+      super(props);
+    } 
+// const countResults = this.state.count;
+// const header = this.state.header;
+// const results = this.state.results
 
   render(){
     return (
-      <>
-      <ul>
+  <>
+      <h3> {this.props.count} </h3>
+      
+      <h3>
         {
-       beautify(this.state.header)
+       beautify(this.props.header)
       
         }
-      </ul>
+      </h3>
+      
 
-      {
-          this.state.results.map((results) => {
-            return <li>{beautify(results)}</li>
-          })
-        }
-      </>
+      // {/* {
+      //     this.renderResResults.map((results) => {
+      //       return <li>{beautify(results)}</li>
+      //     })
+      //   } */}
+</>
     )
   }
 }
