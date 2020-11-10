@@ -24,9 +24,7 @@ class App extends React.Component {
     this.setState({count: this.state.count,header: this.state.header, results: this.state.results })
   }
 
-  renderResResults() {
-    this.setState({})
-  }
+
 
   
 
