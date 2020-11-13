@@ -43,7 +43,9 @@ Import and render Header, Footer, and Form components from other files using ES6
 - This can be done with radio buttons or clickable elements
 - Display the user’s choices on screen in a separate <div> or <section> under the form
 ```
-#
+## Auth-server API
+- https://auth-server-cb.herokuapp.com/
+{"description":"car", "name":"chris"}
 
 ## UML 
 [Class-26 UML](./assets/lab26uml.png)

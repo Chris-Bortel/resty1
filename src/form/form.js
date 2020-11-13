@@ -31,10 +31,11 @@ class Form extends React.Component {
       textarea: `${this.state.method} ${this.state.input}`
     });
   }
-
+  
   async handleSuperagent() {
-    const method = this.state.method;
+    console.log(typeof this.state.textarea)
     const response = await superagent[this.state.method](this.state.input)
+    .send(JSON.parse(this.state.textarea))
     const responseObj = {
       headers: response.headers || [],
       results: response.body
@@ -108,7 +109,7 @@ class Form extends React.Component {
         </form>
 
         <label>
-          <textarea value={this.state.textarea} onChange={this.handleChange} />
+          <textarea name="textarea" value={this.state.textarea} onChange={this.handleChange} />
         </label>
       </div>
     );
