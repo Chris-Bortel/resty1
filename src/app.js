@@ -27,20 +27,6 @@ class App extends React.Component {
     // console.log(data)
   }
 
-  // handleHistory(data) {
-  //   console.log(this.state)
-  //   const tempHistory = this.state.history;
-  //   this.setState({})
-  // // }
-  // // async componentDidMount() {
-  // //   this.setState({fetching:true}) 
-    
-    
-  // //   const header = 
-  // //   this.setState({header:header, results:results, fetching:false})
-  // }
-
-
   render() {
     console.log('line 45', this.state)
     return (

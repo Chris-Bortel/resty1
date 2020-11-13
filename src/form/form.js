@@ -17,17 +17,14 @@ class Form extends React.Component {
     this.handleMethod = this.handleMethod.bind(this);
   }
   handleChange(event) {
-    //dynamically accessing the target
     const { name, value } = event.target;
-    // same as above
-    // const {input, textarea, method}= this.state
+
     this.setState({ [name]: value });
   }
 
   async handleSubmit(event) {
     event.preventDefault();
     await this.handleSuperagent();
-    // this.props.handleHistory(this.state);
     this.setState({
       textarea: `${this.state.method} ${this.state.input}`
     });
