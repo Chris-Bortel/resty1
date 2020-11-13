@@ -14,7 +14,7 @@ class Form extends React.Component {
 
     this.handleChange = this.handleChange.bind(this);
     this.handleSubmit = this.handleSubmit.bind(this);
-    this.handleChangeRadio = this.handleChangeRadio.bind(this);
+    this.handleMethod = this.handleMethod.bind(this);
   }
   handleChange(event) {
     //dynamically accessing the target
@@ -33,7 +33,8 @@ class Form extends React.Component {
   }
 
   async handleSuperagent() {
-    const response = await superagent.get(this.state.input);
+    const method = this.state.method;
+    const response = await superagent[this.state.method](this.state.input)
     const responseObj = {
       headers: response.headers || [],
       results: response.body
@@ -41,11 +42,13 @@ class Form extends React.Component {
     this.props.handler(responseObj)
   }
 
-  handleChangeRadio(event) {
+  handleMethod(event) {
     event.preventDefault();
     // let radio = event.target.value;
     const { name, value } = event.target;
     this.setState({ [name]: value });
+    let method = event.target.value; 
+    this.setState({method});
 
   }
 
@@ -67,7 +70,7 @@ class Form extends React.Component {
           <div class="buttonfield">
             <label>
               <input
-                onChange={this.handleChangeRadio}
+                onClick={this.handleMethod}
                 name="method"
                 type="radio"
                 value="get"
@@ -76,7 +79,7 @@ class Form extends React.Component {
             </label>
             <label>
               <input
-                onChange={this.handleChangeRadio}
+                onClick={this.handleMethod}
                 name="method"
                 type="radio"
                 value="post"
@@ -85,7 +88,7 @@ class Form extends React.Component {
             </label>
             <label>
               <input
-                onChange={this.handleChangeRadio}
+                onClick={this.handleMethod}
                 name="method"
                 type="radio"
                 value="put"
@@ -94,7 +97,7 @@ class Form extends React.Component {
             </label>
             <label>
               <input
-                onChange={this.handleChange}
+                onClick={this.handleChange}
                 name="method"
                 type="radio"
                 value="delete"

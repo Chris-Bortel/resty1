@@ -5,7 +5,8 @@ import "./styles.scss";
 import Header from "./header/header.js";
 import Footer from "./footer/footer.js";
 import Form from "./form/form.js";
-import Results from "./results/results.js"
+import Results from "./results/results.js";
+import If from './if/if.js';
 
 class App extends React.Component {
   constructor(props) {
