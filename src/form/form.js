@@ -24,9 +24,10 @@ class Form extends React.Component {
     this.setState({ [name]: value });
   }
 
-  handleSubmit(event) {
+  async handleSubmit(event) {
     event.preventDefault();
-    this.handleSuperagent();
+    await this.handleSuperagent();
+    // this.props.handleHistory(this.state);
     this.setState({
       textarea: `${this.state.method} ${this.state.input}`
     });
@@ -40,7 +41,7 @@ class Form extends React.Component {
         headers: response.headers || [],
         results: response.body
       }
-      this.props.handler(responseObj)
+      this.props.handler(responseObj, this.state)
     
     } else {
 
@@ -50,7 +51,7 @@ class Form extends React.Component {
         headers: response.headers || [],
         results: response.body
       }
-      this.props.handler(responseObj)
+      this.props.handler(responseObj, this.state)
     }
   }
 
