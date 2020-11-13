@@ -12,11 +12,20 @@ class History extends React.Component {
       {
       
         this.props.history.map((history) => {
-        return <span>{history.method}</span>;
+        return (
+          <div>
+
+          <span>{history.method}</span>
+          <span>{history.input}</span>
+          <span>{history.textarea}</span>
+          
+          </div>
+        )
       }
       )
       }
       </>
+        
     )
   }
 }

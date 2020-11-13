@@ -43,7 +43,7 @@ class App extends React.Component {
           <div className="App"></div>
         </main>
         
-        <Footer />
+        {/* <Footer /> */}
 
       </>
     );
