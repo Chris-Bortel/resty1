@@ -34,13 +34,24 @@ class Form extends React.Component {
   
   async handleSuperagent() {
     console.log(typeof this.state.textarea)
-    const response = await superagent[this.state.method](this.state.input)
-    .send(JSON.parse(this.state.textarea))
-    const responseObj = {
-      headers: response.headers || [],
-      results: response.body
+    if (this.state.method === 'get' || this.state.method === 'delete'){
+      const response =  await superagent[this.state.method](this.state.input)
+      const responseObj = {
+        headers: response.headers || [],
+        results: response.body
+      }
+      this.props.handler(responseObj)
+    
+    } else {
+
+      const response =  await superagent[this.state.method](this.state.input)
+      .send(JSON.parse(this.state.textarea))
+      const responseObj = {
+        headers: response.headers || [],
+        results: response.body
+      }
+      this.props.handler(responseObj)
     }
-    this.props.handler(responseObj)
   }
 
   handleMethod(event) {
