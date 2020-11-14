@@ -24,6 +24,13 @@ class App extends React.Component {
 
   handleForm(responseObj, historyObj ) {
     this.setState({results: responseObj, history: [...this.state.history, historyObj]  })
+    this.handleHistory();
+  }
+
+  handleHistory() {
+    console.log('inside hadndle history')
+    // this.setState({ history: [...this.state.history, historyObj]  })
+    localStorage.setItem('history', JSON.stringify(this.state.history))
     // console.log(data)
   }
 

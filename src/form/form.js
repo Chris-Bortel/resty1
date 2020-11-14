@@ -16,6 +16,18 @@ class Form extends React.Component {
     this.handleSubmit = this.handleSubmit.bind(this);
     this.handleMethod = this.handleMethod.bind(this);
   }
+
+  // localStorageSetData() {
+  //   let queryObj = this.props.history;
+  //   localStorage.setItem('query', JSON.stringify(queryObj))
+  // }
+
+  // localStorageGetData() {
+  //   let queryData = localStorage.getItem('queryData');
+  //   queryData = JSON.parse(queryData)
+  //   console.log('line 28',queryData)
+  // }
+
   handleChange(event) {
     const { name, value } = event.target;
 
@@ -26,12 +38,11 @@ class Form extends React.Component {
     event.preventDefault();
     await this.handleSuperagent();
     this.setState({
-      textarea: `${this.state.method} ${this.state.input}`
+      textarea: ''
     });
   }
   
   async handleSuperagent() {
-    console.log(typeof this.state.textarea)
     if (this.state.method === 'get' || this.state.method === 'delete'){
       const response =  await superagent[this.state.method](this.state.input)
       const responseObj = {
@@ -54,7 +65,6 @@ class Form extends React.Component {
 
   handleMethod(event) {
     event.preventDefault();
-    // let radio = event.target.value;
     const { name, value } = event.target;
     this.setState({ [name]: value });
     let method = event.target.value; 
@@ -70,13 +80,12 @@ class Form extends React.Component {
         <form onSubmit={this.handleSubmit}>
           <label id="inputfield">URL: </label>
           <input
-            // id="inputfield"
             name="input"
             placeholder="http://localhost:3001/category"
             value={this.state.input}
             onChange={this.handleChange}
           />
-          <input type="submit" value="GO!" />
+          <input type="submit" value="GO!"  />
           <div class="buttonfield">
             <label>
               <input
