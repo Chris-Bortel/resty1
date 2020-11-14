@@ -7,6 +7,7 @@ import Footer from "./footer/footer.js";
 import Form from "./form/form.js";
 import Results from "./results/results.js";
 import History from "./history/history.js";
+import { forEachChild } from 'typescript';
 // import If from './if/if.js'
 
 class App extends React.Component {
@@ -22,25 +23,31 @@ class App extends React.Component {
     this.handleForm = this.handleForm.bind(this)
   }
 
-  async handleForm(responseObj, historyObj ) {
-    let history = [...this.state.history, historyObj];
-    let saved = localStorage.setItem('history', JSON.stringify(history))
+  handleForm(responseObj, historyObj ) {
+    let isUnique = false;
+    this.state.history.forEach( obj => {
+      if (obj.method === historyObj.method && obj.textarea === historyObj.textarea && obj.input === historyObj.input) {
+        isUnique = true;
+      }
+    })
 
+    if (isUnique === false) {
+      let history = [...this.state.history, historyObj];
+      let saved = localStorage.setItem('history', JSON.stringify(history))
+  
+  
+      this.setState({results: responseObj, history: history })
+      // this.handleHistory();
+    }
 
-    await this.setState({results: responseObj, history: history })
-    // this.handleHistory();
   }
 
-  handleHistory() {
-    console.log('inside hadndle history')
-    // this.setState({ history: [...this.state.history, historyObj]  })
-    localStorage.setItem('history', JSON.stringify(this.state.history))
-    // console.log(data)
-    console.log(this.state.history, 'line 35 of app')
-  }
+  // handleHistory() {
+  //   localStorage.setItem('history', JSON.stringify(this.state.history))
+  // }
 
   componentDidMount() {
-    let history = JSON.parse(localStorage.getItem('history'));
+    let history = JSON.parse(localStorage.getItem('history')) || [];
     console.log(history, 'line 44')
     this.setState({ history });
   }
@@ -52,7 +59,7 @@ class App extends React.Component {
 
         <Header />
         
-        <Form handler = {this.handleForm} handleHistory = {this.handleHistory}/>
+        <Form handler = {this.handleForm} history = {this.state.history}/>
         
         <Results results = {this.state.results} />
         {/* <Results count = {this.state.count}   header = {this.state.header} results = {this.state.results} /> */}

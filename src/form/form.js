@@ -17,25 +17,14 @@ class Form extends React.Component {
     this.handleMethod = this.handleMethod.bind(this);
   }
 
-  // localStorageSetData() {
-  //   let queryObj = this.props.history;
-  //   localStorage.setItem('query', JSON.stringify(queryObj))
-  // }
-
-  // localStorageGetData() {
-  //   let queryData = localStorage.getItem('queryData');
-  //   queryData = JSON.parse(queryData)
-  //   console.log('line 28',queryData)
-  // }
-
   handleChange(event) {
     const { name, value } = event.target;
-
     this.setState({ [name]: value });
   }
 
   async handleSubmit(event) {
     event.preventDefault();
+   
     await this.handleSuperagent();
     this.setState({
       textarea: ''
@@ -52,7 +41,6 @@ class Form extends React.Component {
       this.props.handler(responseObj, this.state)
     
     } else {
-      console.log(this.state.method, '55')
       const response =  await superagent[this.state.method](this.state.input)
       .send(JSON.parse(this.state.textarea))
       const responseObj = {
@@ -73,7 +61,6 @@ class Form extends React.Component {
   }
 
   render() {
-    console.log("41:::", this.state);
 
     return (
       <div>

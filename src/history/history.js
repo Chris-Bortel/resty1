@@ -29,16 +29,5 @@ class History extends React.Component {
     )
   }
 }
- 
-      
-
-
-// Show a simple history list on the main page
-// TODO: Will want to store the state of history which will end up being something like this.state.input or, on click of GO, the state of the request will be stored and displayed in the history component
-
-// where should I store the state?
-
-//allow a user to click and re-run
 
 export default History;
-
