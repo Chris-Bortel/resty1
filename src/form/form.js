@@ -9,7 +9,7 @@ class Form extends React.Component {
     this.state = {
       input: "",
       textarea: "",
-      method: ""
+      method: "get"
     };
 
     this.handleChange = this.handleChange.bind(this);
@@ -52,7 +52,7 @@ class Form extends React.Component {
       this.props.handler(responseObj, this.state)
     
     } else {
-
+      console.log(this.state.method, '55')
       const response =  await superagent[this.state.method](this.state.input)
       .send(JSON.parse(this.state.textarea))
       const responseObj = {

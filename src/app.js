@@ -22,9 +22,13 @@ class App extends React.Component {
     this.handleForm = this.handleForm.bind(this)
   }
 
-  handleForm(responseObj, historyObj ) {
-    this.setState({results: responseObj, history: [...this.state.history, historyObj]  })
-    this.handleHistory();
+  async handleForm(responseObj, historyObj ) {
+    let history = [...this.state.history, historyObj];
+    let saved = localStorage.setItem('history', JSON.stringify(history))
+
+
+    await this.setState({results: responseObj, history: history })
+    // this.handleHistory();
   }
 
   handleHistory() {
@@ -32,6 +36,13 @@ class App extends React.Component {
     // this.setState({ history: [...this.state.history, historyObj]  })
     localStorage.setItem('history', JSON.stringify(this.state.history))
     // console.log(data)
+    console.log(this.state.history, 'line 35 of app')
+  }
+
+  componentDidMount() {
+    let history = JSON.parse(localStorage.getItem('history'));
+    console.log(history, 'line 44')
+    this.setState({ history });
   }
 
   render() {
