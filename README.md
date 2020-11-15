@@ -7,6 +7,7 @@
  # LAB 26: PHASE 1 
  [Pull Request](https://github.com/jonnyleealas/component-based-api/pull/3)
  [Class-27 Pull Request](https://github.com/Chris-Bortel/resty1/pull/1)
+ [Class-28 Pull Request](https://github.com/Chris-Bortel/resty1/pull/2)
 
 ## Summary: 
 ```
