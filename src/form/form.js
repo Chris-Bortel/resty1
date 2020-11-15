@@ -1,4 +1,6 @@
 import React from "react";
+import superagent from 'superagent';
+
 import "./form.scss";
 
 class Form extends React.Component {
@@ -7,7 +9,7 @@ class Form extends React.Component {
     this.state = {
       input: "",
       textarea: "",
-      radiotracker: ""
+      method: ""
     };
 
     this.handleChange = this.handleChange.bind(this);
@@ -18,15 +20,25 @@ class Form extends React.Component {
     //dynamically accessing the target
     const { name, value } = event.target;
     // same as above
-    // const {input, textarea, radiotracker}= this.state
+    // const {input, textarea, method}= this.state
     this.setState({ [name]: value });
   }
 
   handleSubmit(event) {
     event.preventDefault();
+    this.handleSuperagent();
     this.setState({
-      textarea: `${this.state.radiotracker} ${this.state.input}`
+      textarea: `${this.state.method} ${this.state.input}`
     });
+  }
+
+  async handleSuperagent() {
+    const response = await superagent.get(this.state.input);
+    const responseObj = {
+      headers: response.headers || [],
+      results: response.body
+    }
+    this.props.handler(responseObj)
   }
 
   handleChangeRadio(event) {
@@ -35,9 +47,6 @@ class Form extends React.Component {
     const { name, value } = event.target;
     this.setState({ [name]: value });
 
-    // need to reset the state ti be equal to the button that had been clicked
-    // need to make sure that we dio not overwrite the button
-    // https://reactjs.org/docs/handling-events.html
   }
 
   render() {
@@ -59,7 +68,7 @@ class Form extends React.Component {
             <label>
               <input
                 onChange={this.handleChangeRadio}
-                name="radiotracker"
+                name="method"
                 type="radio"
                 value="get"
               />
@@ -68,7 +77,7 @@ class Form extends React.Component {
             <label>
               <input
                 onChange={this.handleChangeRadio}
-                name="radiotracker"
+                name="method"
                 type="radio"
                 value="post"
               />
@@ -77,7 +86,7 @@ class Form extends React.Component {
             <label>
               <input
                 onChange={this.handleChangeRadio}
-                name="radiotracker"
+                name="method"
                 type="radio"
                 value="put"
               />
@@ -86,7 +95,7 @@ class Form extends React.Component {
             <label>
               <input
                 onChange={this.handleChange}
-                name="radiotracker"
+                name="method"
                 type="radio"
                 value="delete"
               />
