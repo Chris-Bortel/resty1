@@ -24,7 +24,6 @@ class Form extends React.Component {
 
   async handleSubmit(event) {
     event.preventDefault();
-   
     await this.handleSuperagent();
     this.setState({
       textarea: ''
