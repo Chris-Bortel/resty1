@@ -61,7 +61,7 @@ class Form extends React.Component {
   }
 
   render() {
-
+console.log('rendering with ', this.props.history.input)
     return (
       <div>
         <form onSubmit={this.handleSubmit}>
@@ -73,7 +73,7 @@ class Form extends React.Component {
             onChange={this.handleChange}
           />
           <input type="submit" value="GO!"  />
-          <div class="buttonfield">
+          <div className="buttonfield">
             <label>
               <input
                 onClick={this.handleMethod}

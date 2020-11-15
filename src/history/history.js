@@ -2,10 +2,11 @@ import React from 'react';
 import './history.scss';
 
 class History extends React.Component {
-  constructor(props) {
-    super(props);
-    // do I need the state here, or just pass props from app
-  }
+ 
+reRun(input) {
+this.props.reRunForm(input)
+}
+
   render(){
     return (
       <>
@@ -13,11 +14,9 @@ class History extends React.Component {
       
         this.props.history.map((history) => {
         return (
-          <div>
+          <div onClick = {() => this.reRun(history)} key = {Math.random()}>
 
-          <span>{history.method}</span>
-          <span>{history.input}</span>
-          <span>{history.textarea}</span>
+          {history.method} - {history.input}
           
           </div>
         )

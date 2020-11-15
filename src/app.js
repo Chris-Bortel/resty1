@@ -7,7 +7,6 @@ import Footer from "./footer/footer.js";
 import Form from "./form/form.js";
 import Results from "./results/results.js";
 import History from "./history/history.js";
-import { forEachChild } from 'typescript';
 // import If from './if/if.js'
 
 class App extends React.Component {
@@ -18,7 +17,8 @@ class App extends React.Component {
       // count: 0, 
       header: [], 
       results: '',
-      history: [] 
+      history: [],
+      reRun: {}
     };
     this.handleForm = this.handleForm.bind(this)
   }
@@ -30,10 +30,10 @@ class App extends React.Component {
         isUnique = true;
       }
     })
-
+console.log(historyObj, 'history obj')
     if (isUnique === false) {
       let history = [...this.state.history, historyObj];
-      let saved = localStorage.setItem('history', JSON.stringify(history))
+      localStorage.setItem('history', JSON.stringify(history))
   
   
       this.setState({results: responseObj, history: history })
@@ -42,16 +42,14 @@ class App extends React.Component {
 
   }
 
-  // handleHistory() {
-  //   localStorage.setItem('history', JSON.stringify(this.state.history))
-  // }
-
   componentDidMount() {
     let history = JSON.parse(localStorage.getItem('history')) || [];
-    console.log(history, 'line 44')
     this.setState({ history });
   }
-
+  
+  reRunFormHistory = (data) => {
+    this.setState({reRun: data})
+  }
   render() {
     console.log('line 45', this.state)
     return (
@@ -59,16 +57,16 @@ class App extends React.Component {
 
         <Header />
         
-        <Form handler = {this.handleForm} history = {this.state.history}/>
+        <Form handler = {this.handleForm} history = {this.state.reRun} />
         
         <Results results = {this.state.results} />
-        {/* <Results count = {this.state.count}   header = {this.state.header} results = {this.state.results} /> */}
-        <History history = {this.state.history} />
+ 
+        <History history = {this.state.history} reRunForm = {this.reRunFormHistory}/>
         <main>
           <div className="App"></div>
         </main>
         
-        {/* <Footer /> */}
+        <Footer />
 
       </>
     );
