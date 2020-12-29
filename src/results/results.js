@@ -1,7 +1,6 @@
 
 import React from 'react';
 
-import beautify from 'json-beautify';
 import JSONPretty from 'react-json-pretty'
 class Results extends React.Component {
   constructor(props) {

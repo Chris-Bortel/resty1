@@ -7,6 +7,7 @@
  # LAB 26: PHASE 1 
  [Pull Request](https://github.com/jonnyleealas/component-based-api/pull/3)
  [Class-27 Pull Request](https://github.com/Chris-Bortel/resty1/pull/1)
+ [Class-28 Pull Request](https://github.com/Chris-Bortel/resty1/pull/2)
 
 ## Summary: 
 ```
@@ -43,7 +44,9 @@ Import and render Header, Footer, and Form components from other files using ES6
 - This can be done with radio buttons or clickable elements
 - Display the user’s choices on screen in a separate <div> or <section> under the form
 ```
-#
+## Auth-server API
+- https://auth-server-cb.herokuapp.com/
+{"description":"car", "name":"chris"}
 
 ## UML 
 [Class-26 UML](./assets/lab26uml.png)

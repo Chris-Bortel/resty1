@@ -9,65 +9,73 @@ class Form extends React.Component {
     this.state = {
       input: "",
       textarea: "",
-      method: ""
+      method: "get"
     };
 
     this.handleChange = this.handleChange.bind(this);
     this.handleSubmit = this.handleSubmit.bind(this);
-    this.handleChangeRadio = this.handleChangeRadio.bind(this);
+    this.handleMethod = this.handleMethod.bind(this);
   }
+
   handleChange(event) {
-    //dynamically accessing the target
     const { name, value } = event.target;
-    // same as above
-    // const {input, textarea, method}= this.state
     this.setState({ [name]: value });
   }
 
-  handleSubmit(event) {
+  async handleSubmit(event) {
     event.preventDefault();
-    this.handleSuperagent();
+    await this.handleSuperagent();
     this.setState({
-      textarea: `${this.state.method} ${this.state.input}`
+      textarea: ''
     });
   }
-
+  
   async handleSuperagent() {
-    const response = await superagent.get(this.state.input);
-    const responseObj = {
-      headers: response.headers || [],
-      results: response.body
+    if (this.state.method === 'get' || this.state.method === 'delete'){
+      const response =  await superagent[this.state.method](this.state.input)
+      const responseObj = {
+        headers: response.headers || [],
+        results: response.body
+      }
+      this.props.handler(responseObj, this.state)
+    
+    } else {
+      const response =  await superagent[this.state.method](this.state.input)
+      .send(JSON.parse(this.state.textarea))
+      const responseObj = {
+        headers: response.headers || [],
+        results: response.body
+      }
+      this.props.handler(responseObj, this.state)
     }
-    this.props.handler(responseObj)
   }
 
-  handleChangeRadio(event) {
+  handleMethod(event) {
     event.preventDefault();
-    // let radio = event.target.value;
     const { name, value } = event.target;
     this.setState({ [name]: value });
+    let method = event.target.value; 
+    this.setState({method});
 
   }
 
   render() {
-    console.log("41:::", this.state);
-
+console.log('rendering with ', this.props.history.input)
     return (
       <div>
         <form onSubmit={this.handleSubmit}>
           <label id="inputfield">URL: </label>
           <input
-            // id="inputfield"
             name="input"
             placeholder="http://localhost:3001/category"
             value={this.state.input}
             onChange={this.handleChange}
           />
-          <input type="submit" value="GO!" />
-          <div class="buttonfield">
+          <input type="submit" value="GO!"  />
+          <div className="buttonfield">
             <label>
               <input
-                onChange={this.handleChangeRadio}
+                onClick={this.handleMethod}
                 name="method"
                 type="radio"
                 value="get"
@@ -76,7 +84,7 @@ class Form extends React.Component {
             </label>
             <label>
               <input
-                onChange={this.handleChangeRadio}
+                onClick={this.handleMethod}
                 name="method"
                 type="radio"
                 value="post"
@@ -85,7 +93,7 @@ class Form extends React.Component {
             </label>
             <label>
               <input
-                onChange={this.handleChangeRadio}
+                onClick={this.handleMethod}
                 name="method"
                 type="radio"
                 value="put"
@@ -94,7 +102,7 @@ class Form extends React.Component {
             </label>
             <label>
               <input
-                onChange={this.handleChange}
+                onClick={this.handleChange}
                 name="method"
                 type="radio"
                 value="delete"
@@ -105,7 +113,7 @@ class Form extends React.Component {
         </form>
 
         <label>
-          <textarea value={this.state.textarea} onChange={this.handleChange} />
+          <textarea name="textarea" value={this.state.textarea} onChange={this.handleChange} />
         </label>
       </div>
     );
